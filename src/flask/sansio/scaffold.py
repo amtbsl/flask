@@ -403,7 +403,11 @@ class Scaffold:
         The endpoint name for the route defaults to the name of the view
         function if the ``endpoint`` parameter isn't passed. An error
         will be raised if a function has already been registered for the
-        endpoint.
+        endpoint. The rule is not added when this error is raised.
+
+        .. versionchanged:: 3.2.0
+            A rule is no longer left registered when an endpoint conflict is
+            rejected.
 
         The ``methods`` parameter defaults to ``["GET"]``. ``HEAD`` is
         always added automatically, and ``OPTIONS`` is added
