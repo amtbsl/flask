@@ -205,8 +205,7 @@ def test_add_url_rule_endpoint_conflict_does_not_add_rule(app, client):
     with pytest.raises(
         AssertionError,
         match=(
-            "View function mapping is overwriting an existing "
-            "endpoint function: same"
+            "View function mapping is overwriting an existing endpoint function: same"
         ),
     ):
         app.add_url_rule("/b", endpoint="same", view_func=second)
