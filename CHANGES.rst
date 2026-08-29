@@ -30,6 +30,8 @@ Unreleased
     of only lower case file extensions. :pr:`6012`
 -   Fix parsing IPv6 with port in ``run`` and the test client. :pr:`6096`
 -   Add ``app.query`` route decorator for the HTTP QUERY method.
+-   Do not leave a URL rule registered when ``add_url_rule`` rejects a
+    conflicting endpoint function. :issue:`6143`
 
 
 Version 3.1.3
