@@ -193,6 +193,28 @@ def test_url_mapping(app, client):
     assert random_uuid4 in rv.data.decode("utf-8")
 
 
+def test_add_url_rule_endpoint_conflict_does_not_add_rule(app, client):
+    def first():
+        return "first"
+
+    def second():
+        return "second"
+
+    app.add_url_rule("/a", endpoint="same", view_func=first)
+
+    with pytest.raises(
+        AssertionError,
+        match=(
+            "View function mapping is overwriting an existing "
+            "endpoint function: same"
+        ),
+    ):
+        app.add_url_rule("/b", endpoint="same", view_func=second)
+
+    assert client.get("/a").data == b"first"
+    assert client.get("/b").status_code == 404
+
+
 def test_werkzeug_routing(app, client):
     from werkzeug.routing import Rule
     from werkzeug.routing import Submount
